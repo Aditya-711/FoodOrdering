@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* Body Styling */
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f7f7f7;
+        color: #333;
+        padding: 20px;
+      }
+
+      /* Container Styling */
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        color: #5a67d8; /* Cool blue color */
+      }
+
+      h2 {
+        margin-bottom: 10px;
+        font-size: 1.8rem;
+        color: #2d3748;
+      }
+
+      /* Cart Items Container */
+      #cartItemsContainer {
+        margin-top: 20px;
+        border-top: 2px solid #e2e8f0;
+        padding-top: 10px;
+      }
+
+      /* Individual Cart Item */
+      .cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        padding: 15px;
+        background-color: #edf2f7;
+        border-radius: 6px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .cart-item p {
+        margin: 0;
+        font-size: 1rem;
+      }
+
+      .cart-item strong {
+        font-size: 1.2rem;
+        color: #2b6cb0;
+      }
+
+      .cart-item p:last-child {
+        font-weight: bold;
+        font-size: 1.1rem;
+        color: #48bb78; /* Green color for price */
+      }
+
+      /* Button Styles */
+      #checkoutButton {
+        display: block;
+        width: 100%;
+        background-color: #48bb78; /* Green */
+        color: #fff;
+        font-size: 1.2rem;
+        padding: 15px;
+        border: none;
+        border-radius: 6px;
+        margin-top: 30px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      #checkoutButton:hover {
+        background-color: #38a169;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Checkout</h1>
+
+      <h2>Your Cart</h2>
+      <div id="cartItemsContainer">
+        <% 
+        let sum = 0;
+        console.log(locals.userForCheckout[0].item.name+"n");
+        userForCheckout.forEach(cartItem => { console.log(cartItem+"-----"); 
+            sum = sum + cartItem.item.price;
+        %>
+        <div class="cart-item">
+          <p>Quantity:<%= cartItem.quantity %></p>
+          <p><strong><%= cartItem.item.name %></strong></p>
+          <p>Price: <%= cartItem.item.price %> Rs</p>
+        </div>
+        <% }) %>
+      </div>
+       <h3>Total Price: <%= sum %></h3> 
+
+       <button id="checkoutButton" onclick="confirmCheckout()">Confirm Checkout</button>
+    </div>
+  </body>
+</html>

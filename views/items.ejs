@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Browse Items</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Browse Food Items</h1>
+      <h1 id="cartCount"><%=locals.user.cart.length %></h1>
+
+        <div>
+          <select id="category" onchange="loadItem()">
+            <option value="All">All</option>
+            <option value="Fruit">Fruit</option>
+            <option value="Vegetable">Vegetable</option>
+            <option value="Non-veg">Non-veg</option>
+            <option value="Bread">Bread</option>
+          </select>
+        </div>
+
+      <div id="itemsContainer">
+
+      </div>
+      
+      <h2>Cart</h2>
+      <div id="cartContainer"></div>
+      <form action="/checkout" method="get">
+        <button type="submit">Checkout</button>
+      </form>
+      
+    </div>
+
+    <script>
+         async function loadItem() {
+              const category = document.getElementById("category").value;
+              const response = await fetch(`/items/${category}`);
+              const items = await response.json();
+              const container = document.getElementById("itemsContainer");
+              container.innerHTML = "";
+              items.forEach(item => {
+                container.innerHTML += `
+                <div>
+                    <form action="/cart" method="POST">
+                    <h3>${item.name} - ${item.price} Rs</h3>
+                     <input type="hidden" name="itemId" value="${item._id}">
+                    <button type="submit">Add to Cart</button>
+                     </form>
+                 </div>
+                `
+              });
+          }
+
+        //   async function loadCart() {
+        //     const response = await fetch
+        //   }
+
+        // async function loadItems() {
+        //   const category = document.getElementById("category").value;
+        //   const response = await fetch(`/items/${category}`);
+        //   const items = await response.json();
+
+        //   const container = document.getElementById("itemsContainer");
+        //   container.innerHTML = "";
+        //   items.forEach((item) => {
+        //     container.innerHTML += `<div>
+        //     <h3>${item.name} - ${item.price} Rs</h3>
+        //     <button onclick="addToCart('${item._id}')">Add to Cart</button>
+        //   </div>`;
+        //   });
+        // }
+
+        // async function addToCart(itemId) {
+        //   console.log("add to cart called");
+
+        //   await fetch("/cart", {
+        //     method: "POST",
+        //     headers: { "Content-Type": "application/json" },
+        //     body: JSON.stringify({ itemId, quantity: 1 }),
+        //   });
+        //   loadCart();
+        // }
+
+        // async function loadCart() {
+        //   const response = await fetch('/cart',{method:"POST"});
+        //   const cartItems = await response.json();
+        //     console.log("CartItems Length= "+cartItems.length);
+
+        //   const cartContainer = document.getElementById('cartContainer');
+        //   const cartCount = document.getElementById("cartCount");
+        //   cartCount.innerHTML = `Cart Count:${cartItems.length} `
+        //   cartContainer.innerHTML = '';
+        //   cartItems.forEach(item => {
+        //     cartContainer.innerHTML += `<div>
+        //       <p>${item.item.name} - Quantity: ${item.quantity}</p>
+        //     </div>`;
+        //   });
+        // }
+
+        // async function checkout() {
+        //   const response = await fetch("/checkout", { method: "POST" });
+        //   const result = await response.json();
+        //   alert(result.message);
+        //   loadCart();
+        // }
+
+        // // Load items on page load
+         loadItem();
+        // //loadCart();
+    </script>
+  </body>
+</html>
