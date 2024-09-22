@@ -27,7 +27,7 @@ mongoose.connect('mongodb://localhost:27017/adityadb', {
   useUnifiedTopology: true
 }).then(() => console.log('Connected to MongoDB'))
   .catch(err => console.log(err));
-
+ 
 // Routes
 
 // Registration
@@ -150,6 +150,9 @@ app.get('/checkout', async (req, res) => {
     //res.status(500).json({ error: 'Checkout failed' });
  // } 
 }); 
+app.get('/transactionDone',(req,res)=>{
+    res.render("transactionDone.ejs");
+})
 app.get('/',(req,res)=>{ 
     res.render("Login.ejs");
 })

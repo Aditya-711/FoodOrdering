@@ -103,11 +103,11 @@
 
       <h2>Your Cart</h2>
       <div id="cartItemsContainer">
-        <% 
-        let sum = 0;
-        console.log(locals.userForCheckout[0].item.name+"n");
+        <%
+        console.log(locals.userForCheckout[0].item.name+"nnn"+locals.userForCheckout[0].item.price+"nnnn");
+        let sum = 0; 
         userForCheckout.forEach(cartItem => { console.log(cartItem+"-----"); 
-            sum = sum + cartItem.item.price;
+        sum = sum + cartItem.item.price; 
         %>
         <div class="cart-item">
           <p>Quantity:<%= cartItem.quantity %></p>
@@ -116,9 +116,11 @@
         </div>
         <% }) %>
       </div>
-       <h3>Total Price: <%= sum %></h3> 
+      <h3>Total Price: <%= sum %></h3>
 
-       <button id="checkoutButton" onclick="confirmCheckout()">Confirm Checkout</button>
+      <form action="/transactionDone" method="get">
+        <button type="submit" id="checkoutButton">Confirm Checkout</button>
+        </form>
     </div>
   </body>
 </html>
