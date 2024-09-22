@@ -17,6 +17,8 @@ Clone the repo: git clone https://github.com/yourusername/foodies-hub.git.
 6. You can also try the website at "https://foodordering-y5j2.onrender.com".
 
 7. For Trial Purposes there is an existing registered user which you can directly log in with.
-    email: aditya@123.com
-    password: 1234
+
+email: aditya@123.com
+
+password: 1234
 
