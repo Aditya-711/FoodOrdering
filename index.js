@@ -60,7 +60,7 @@ app.post('/login', async (req, res) => {
     
     const user = await User.findOne({ email });
     console.log("user in /login: "+user.email);
-    if (!user) return res.status(400).json({ error: 'User not found' });
+    if (!user) return res.redirect("/");
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ error: 'Invalid credentials' });
@@ -72,7 +72,8 @@ app.post('/login', async (req, res) => {
     res.redirect("/items");
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "User not found" });
+    res.redirect("/");
+    // res.status(500).json({ error: "User not found" });
   }
 });
 
