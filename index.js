@@ -165,7 +165,7 @@ app.get('/transactionDone',(req,res)=>{
     res.render("transactionDone.ejs");
 })
 app.get('/',(req,res)=>{ 
-    res.render("Login.ejs");
+    res.render("login.ejs");
 })
 // Start Server
 app.listen(PORT, () => {
