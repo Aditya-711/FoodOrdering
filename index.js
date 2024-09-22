@@ -72,7 +72,7 @@ app.post('/login', async (req, res) => {
     res.redirect("/items");
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: error });
+    res.status(500).json({ error: "User not found" });
   }
 });
 
