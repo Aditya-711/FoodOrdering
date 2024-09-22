@@ -5,14 +5,16 @@ import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 
-// Import Models
 import User from './models/User.js';
 import Item from './models/Item.js';
 
+
 const app = express();
 app.set('view engine','ejs');
+
 const PORT = process.env.PORT || 3000;
- app.use(express.static("public"));
+app.use(express.static("public"));
+
 // Middleware
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
@@ -20,22 +22,28 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 let currentUser;
-
+let url = "mongodb+srv://adityainamdar711:Cr%407rocks@adityacluster.rr8bu.mongodb.net/";
+let url1 = "mongodb+srv://adityainamdar711:Cr%407rocks@adityacluster.rr8bu.mongodb.net/?retryWrites=true&w=majority&appName=AdityaCluster";
+let url2 = "mongodb://localhost:27017/adityadb";
 // MongoDB Connection
-mongoose.connect('mongodb://localhost:27017/adityadb', {
+mongoose.connect(url1, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => console.log('Connected to MongoDB'))
   .catch(err => console.log(err));
  
 // Routes
-
+// const user = await User.findOne({"email":"123@gmail.com"});
+// const newUser = new User({ "email":"tempemail", "password": "123" });
+//console.log("user here:"+newUser);
 // Registration
 app.post('/register', async (req, res) => {
   const { email, password } = req.body;
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ email, password: hashedPassword });
+    console.log("user in /register: "+newUser.email);
+
     await newUser.save();
 
     res.status(201).json({ message: 'User registered successfully' });
@@ -51,18 +59,20 @@ app.post('/login', async (req, res) => {
   try {
     
     const user = await User.findOne({ email });
+    console.log("user in /login: "+user.email);
     if (!user) return res.status(400).json({ error: 'User not found' });
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ error: 'Invalid credentials' });
 
     const token = jwt.sign({ id: user._id }, 'secret', { expiresIn: '1h' });
-     currentUser = user;
+    currentUser = user;
     res.cookie('token', token, { httpOnly: true });
    // res.json({ message: 'Logged in successfully' });
     res.redirect("/items");
   } catch (error) {
-    res.status(500).json({ error: 'Login failed' });
+    console.log(error);
+    res.status(500).json({ error: error });
   }
 });
 
