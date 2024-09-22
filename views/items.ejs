@@ -9,7 +9,7 @@
   <body>
     <div class="container">
       <h1>Browse Food Items</h1>
-      <h1 id="cartCount"><%=locals.user.cart.length %></h1>
+      <h1 id="cartCount">Cart Count: <%=locals.user.cart.length %></h1>
 
         <div>
           <select id="category" onchange="loadItem()">
@@ -25,7 +25,7 @@
 
       </div>
       
-      <h2>Cart</h2>
+      <h2>Checkout</h2>
       <div id="cartContainer"></div>
       <form action="/checkout" method="get">
         <button type="submit">Checkout</button>
