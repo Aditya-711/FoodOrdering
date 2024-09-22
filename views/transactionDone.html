@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Approved</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f7;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid #4caf50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            animation: circleGrow 1s ease forwards;
+        }
+
+        .tick-mark {
+            font-size: 80px;
+            color: #4caf50;
+            opacity: 0;
+            transform: scale(0);
+            animation: tickAnimation 1.5s ease forwards 1s;
+        }
+
+        @keyframes tickAnimation {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes circleGrow {
+            0% {
+                transform: scale(0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .message {
+            font-size: 28px;
+            color: #333;
+            margin: 20px 0;
+        }
+
+        .order-info {
+            font-size: 20px;
+            color: #555;
+        }
+
+        .order-info span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="circle">
+            <div class="tick-mark">✔</div>
+        </div>
+        <div class="message">Order Approved!</div>
+        <div class="order-info">Order ID: <span id="order-id"></span></div>
+        <div class="order-info">Tracking ID: <span id="tracking-id"></span></div>
+    </div>
+
+    <script>
+        // Function to generate a random string of length 8
+        function generateRandomID() {
+            return Math.random().toString(36).substr(2, 8).toUpperCase();
+        }
+
+        // Set the order and tracking IDs
+        document.getElementById('order-id').innerText = generateRandomID();
+        document.getElementById('tracking-id').innerText = generateRandomID();
+    </script>
+
+</body>
+</html>
