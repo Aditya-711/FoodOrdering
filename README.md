@@ -10,7 +10,7 @@ Clone the repo: git clone https://github.com/yourusername/foodies-hub.git.
 
 3. Run `npm install` to download the packages.
 
-4. Import the items.json file to mongodb compass to browse items.
+4. Import the food_items.json file to mongodb compass to browse items.
 
 5. Run `node index.js` to run the project.
 
