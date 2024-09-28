@@ -22,8 +22,6 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 let currentUser;
-let url = "mongodb+srv://adityainamdar711:Cr%407rocks@adityacluster.rr8bu.mongodb.net/";
-let url1 = "mongodb+srv://adityainamdar711:Cr%407rocks@adityacluster.rr8bu.mongodb.net/?retryWrites=true&w=majority&appName=AdityaCluster";
 let url2 = "mongodb://localhost:27017/adityadb";
 // MongoDB Connection
 mongoose.connect(url1, {
